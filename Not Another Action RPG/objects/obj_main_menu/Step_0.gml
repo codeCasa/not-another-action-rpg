@@ -1,7 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 menu_move_direction = scr_is_movement_key_pressed(MovementKey.Down) - scr_is_movement_key_pressed(MovementKey.Up)
-
+var isActionPressed = scr_is_action_key_pressed(ActionInput.Confirm)
 if (debounce_timer <= 0 && menu_move_direction != 0) {
 	menu_index += menu_move_direction
 	// Reset debounce timer
@@ -17,14 +17,14 @@ if(menu_index < 0) {
 //	audio_play_sound(snd_menu_switch, 1, false)	
 //}
 last_selected_menu_item = menu_index
-i = 0
-repeat(array_length(buttons)) {
+for(var i = 0; i < array_length(buttons); i++) {
 	if(buttons[i] == undefined){
-		i++;
 		continue;
 	}
 	buttons[i].selected = menu_index == i
-	i++;
+	if(buttons[i].selected && isActionPressed && buttons[i].execute != undefined){
+		buttons[i].execute();
+	}
 }
 
 // Update debounce timer

@@ -7,9 +7,13 @@ menu_y = room_height/2;
 button_height = 32;
 
 // buttons to display
-buttonTitles[0] = "New Game"
-buttonTitles[1] = "Load Game"
-buttonTitles[2] = "Exit"
+buttonTitles[0] = "New Game";
+buttonTitles[1] = "Load Game";
+buttonTitles[2] = "Exit";
+buttonExe[0] = undefined;
+buttonExe[1] = undefined;
+buttonExe[2] = scr_exit_to_desktop;
+
 buttons = array_create(array_length(buttonTitles))
 menu_index = 0
 last_selected_menu_item = 0
