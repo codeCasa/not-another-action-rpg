@@ -10,7 +10,7 @@ button_height = 32;
 buttonTitles[0] = "New Game";
 buttonTitles[1] = "Load Game";
 buttonTitles[2] = "Exit";
-buttonExe[0] = undefined;
+buttonExe[0] = scr_new_game;
 buttonExe[1] = undefined;
 buttonExe[2] = scr_exit_to_desktop;
 

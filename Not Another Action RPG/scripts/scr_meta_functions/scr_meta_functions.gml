@@ -19,3 +19,7 @@ function scr_exit_to_desktop(){
 	        break;
 	}
 }
+
+function scr_new_game(){
+	room_goto(1)
+}
