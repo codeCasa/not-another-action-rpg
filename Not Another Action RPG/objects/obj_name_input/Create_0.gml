@@ -6,7 +6,7 @@ self.characters = [
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
     "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
     "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3",
-    "4", "5", "6", "7", "8", "9", "-", "Spc", "Del"
+    "4", "5", "6", "7", "8", "9", "-", "Spc", "Del","Clr"
 ];
 self.move_direction_x = 0;
 self.move_direction_y = 0;
@@ -15,7 +15,12 @@ self.selected_char[1] = 0;
 self.debounce_timer = 0;
 self.selectedCharacters = ""
 self.maxStrLength = 12
-
+self.hintText = "This is a hint"
+self.confirmationOptions[0] = "Confirm"
+self.confirmationOptions[1] = "Cancel"
+self.isSelectingConfirmationOptions = false;
+self.selectedConfirmationOption = 0;
+self.onFinish = undefined
 
 // Blinking variables
 self.blinkingInterval = 0.4; // Half a second (30 frames at 60 FPS)
@@ -23,8 +28,8 @@ self.blinkTimer = 0;
 self.isBarVisible = true;
 
 // Define the dimensions and position of the grid
-self.gridX = 100;
-self.gridY = 100;
+self.gridX = x;
+self.gridY = y;
 self.cellSize = 48;
 self.columns = 6;
 self.rows = ceil(array_length(characters) / columns);
@@ -96,6 +101,10 @@ self.find_character_in_grid = function(c, r){
 
 self.update_selected_characters_with_char = function(char){
 	if(char == ""){
+		return
+	}
+	if(char == "Clr"){
+		selectedCharacters="" 
 		return
 	}
 	if(char == "Spc" && string_length(selectedCharacters) < maxStrLength){

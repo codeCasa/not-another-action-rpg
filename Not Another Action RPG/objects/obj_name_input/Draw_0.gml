@@ -25,7 +25,7 @@ for (var i = 0; i < array_length(characters); i++) {
     var cellY = gridY + row * (cellSize + padding);
 
     // Draw the background rounded rectangle
-	if(column == selected_char[0] && selected_char[1] == row){
+	if(column == selected_char[0] && selected_char[1] == row && !self.isSelectingConfirmationOptions){
 		draw_set_color(selectedBgColor)
 	}else{
 		draw_set_color(backgroundColor);
@@ -36,7 +36,7 @@ for (var i = 0; i < array_length(characters); i++) {
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
 	
-	if(column == selected_char[0] && selected_char[1] == row){
+	if(column == selected_char[0] && selected_char[1] == row && !self.isSelectingConfirmationOptions){
 		draw_set_color(selectedTextColor)
 	}else{
 		draw_set_color(textColor);
@@ -103,3 +103,70 @@ if (isBarVisible) {
     draw_set_color(pulsingBarColor);
     draw_roundrect_ext(pulsingBarX, pulsingBarY, pulsingBarX + pulsingBarWidth, pulsingBarY + pulsingBarHeight, 4, 4, false);
 }
+
+
+/// Hint Panel
+// Set up variables for the hint panel
+var hintPanelWidth = selectedRectWidth;
+var hintPanelHeight = 40;
+var hintPanelX = selectedRectX;
+var hintPanelY = selectedRectY - hintPanelHeight - 20;
+var hintPanelCornerRadius = 8;
+
+// Calculate the position for the hint text in the hint panel
+var hintTextX = hintPanelX + hintPanelWidth * 0.5;
+var hintTextY = hintPanelY + hintPanelHeight * 0.5;
+
+// Draw the rounded rectangle for the hint panel
+draw_set_color(bezelColor);
+draw_roundrect_ext(hintPanelX, hintPanelY, hintPanelX + hintPanelWidth, hintPanelY + hintPanelHeight, hintPanelCornerRadius, hintPanelCornerRadius, false);
+
+// Draw the background rounded rectangle
+draw_set_color(backgroundColor);
+draw_roundrect_ext(hintPanelX + 2, hintPanelY + 2, hintPanelX + hintPanelWidth - 2, hintPanelY + hintPanelHeight - 2, hintPanelCornerRadius, hintPanelCornerRadius, false);
+
+// Draw the hint text
+draw_set_halign(fa_center);
+draw_set_valign(fa_middle);
+draw_set_color(textColor);
+draw_text(hintTextX, hintTextY, hintText);
+
+
+/// Confirmation Panel
+// Set up variables for the confirmation panel
+var confirmationPanelWidth = (gridWidth + (padding * columns)) / 2.5;
+var confirmationPanelHeight = bezelY2
+var confirmationPanelX = bezelX2 + (padding * 1.5);
+var confirmationPanelY = bezelY1;
+
+// Draw the confirmation panel background
+draw_set_color(bezelColor);
+draw_roundrect_ext(confirmationPanelX, confirmationPanelY, confirmationPanelX + confirmationPanelWidth,
+	confirmationPanelHeight, 8, 8, false);
+
+
+var startX = confirmationPanelX + (string_width("> ") * 1.55)
+var verticalSpacing = string_height("M") * 1.2; // Adjust this value for desired spacing
+
+// Draw the confirmation options in reverse order from the bottom of the panel with vertical spacing
+for (var i = array_length(confirmationOptions) - 1; i >= 0; i--) {
+    var optionY = confirmationPanelHeight - 
+        (string_height(confirmationOptions[i]) * (array_length(confirmationOptions) - 1 - i))
+        - (string_height("M") * 1.5)
+	if(i < array_length(confirmationOptions) - 1) {
+		optionY -= verticalSpacing
+	}	
+
+	if(self.isSelectingConfirmationOptions && i == self.selectedConfirmationOption){
+		draw_set_color(selectedBgColor)
+	    draw_set_halign(fa_left); // Align the ">" symbol to the left
+	    draw_set_valign(fa_middle);
+        draw_text(startX - string_width("> "), optionY, ">");
+	}else{
+		draw_set_color(textColor);
+	}
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_middle);
+    draw_text(startX, optionY, confirmationOptions[i]);
+}
+

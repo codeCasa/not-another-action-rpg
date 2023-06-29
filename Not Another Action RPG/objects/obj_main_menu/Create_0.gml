@@ -13,7 +13,6 @@ buttonTitles[2] = "Exit";
 buttonExe[0] = scr_new_game;
 buttonExe[1] = undefined;
 buttonExe[2] = scr_exit_to_desktop;
-
 buttons = array_create(array_length(buttonTitles))
 menu_index = 0
 last_selected_menu_item = 0
