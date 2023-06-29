@@ -26,6 +26,11 @@ if(selected_char[1] > rows - 1){
 	selected_char[1] = rows - 1
 }
 
+if(isActionPressed){
+	var char = self.find_character_in_grid(selected_char[0], selected_char[1])
+	self.update_selected_characters_with_char(char)
+}
+
 
 // Update debounce timer
 debounce_timer -= (delta_time / 1000000);

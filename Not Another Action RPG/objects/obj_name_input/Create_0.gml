@@ -76,28 +76,44 @@ self.find_character_position = function (inputChar, key){
 	return [row, column, char];
 }
 
-self.find_character_in_grid = function(xC, yC){
-	///
-	/// Finds the character in the grid based on the given x and y position.
-	///
-	/// Arguments:
-	///   - x: The x position.
-	///   - y: The y position.
-	///   - gridX: The x position of the grid.
-	///   - gridY: The y position of the grid.
-	///   - cellSize: The size of each cell in the grid.
-	///   - columns: The number of columns in the grid.
-	///
-	/// Returns:
-	///   The character at the specified position in the grid, or an empty string if no character is found.
+/// Find character in grid
+/// Returns the character at the specified row and column in the grid.
+/// Arguments:
+///   - column: The column index (0-based).
+///   - row: The row index (0-based).
+/// Returns:
+///   The character at the specified row and column.
+self.find_character_in_grid = function(c, r){
+	for (var i = 0; i < array_length(characters); i++) {
+	    var column = i mod columns;
+	    var row = floor(i / columns);
+		if(r == row && c == column){
+			return characters[i]
+		}
+	}
+	return "";
+}
 
-	var column = clamp(floor((xC - gridX) / cellSize), 0, columns - 1);
-	var row = clamp(floor((yC - gridY) / cellSize), 0, floor(array_length(characters) / columns) - 1);
-	var characterIndex = row * columns + column;
-
-	if (characterIndex >= 0 && characterIndex < array_length(characters)) {
-	    return characters[characterIndex];
+self.update_selected_characters_with_char = function(char){
+	if(char == ""){
+		return
+	}
+	if(char == "Spc" && string_length(selectedCharacters) < maxStrLength){
+		selectedCharacters += " "
+	}else if(char == "Del" && string_length(selectedCharacters) > 0){
+		selectedCharacters = string_delete(selectedCharacters, string_length(selectedCharacters), 1)
 	}
 
-	return "";
+	if(char != "Del" && string_length(selectedCharacters) == maxStrLength){
+		selectedCharacters = string_delete(selectedCharacters, string_length(selectedCharacters), 1)
+		if(char == "Spc"){
+			selectedCharacters += " "
+		} else {
+			selectedCharacters += char
+		}
+	}
+	if(char != "Del" && char != "Spc" && string_length(selectedCharacters) < maxStrLength){
+		selectedCharacters += char
+	}
+	
 }

@@ -12,29 +12,9 @@ if(keyboard_key != vk_enter){
 		selected_char[1] = row
 		char = position[2]
 	}
-}else{
-	char = self.find_character_in_grid(selected_char[0], selected_char[1])
 }
-io_clear()
 
 if(char == ""){
 	return;
 }
-
-if(char == "Spc" && string_length(selectedCharacters) < maxStrLength){
-	selectedCharacters += " "
-}else if(char == "Del" && string_length(selectedCharacters) > 0){
-	selectedCharacters = string_delete(selectedCharacters, string_length(selectedCharacters), 1)
-}
-
-if(char != "Del" && string_length(selectedCharacters) == maxStrLength){
-	selectedCharacters = string_delete(selectedCharacters, string_length(selectedCharacters), 1)
-	if(char == "Spc"){
-		selectedCharacters += " "
-	} else {
-		selectedCharacters += char
-	}
-}
-if(char != "Del" && char != "Spc" && string_length(selectedCharacters) < maxStrLength){
-	selectedCharacters += char
-}
+self.update_selected_characters_with_char(char)

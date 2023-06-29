@@ -1,5 +1,5 @@
 enum ActionInput {
-	Confirm
+	Confirm,
 }
 
 function scr_is_action_key_pressed(input){
