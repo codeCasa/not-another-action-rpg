@@ -47,6 +47,7 @@
     {"id":{"name":"scr_constants","path":"scripts/scr_constants/scr_constants.yy",},},
     {"id":{"name":"ts_plains","path":"tilesets/ts_plains/ts_plains.yy",},},
     {"id":{"name":"scr_create_button","path":"scripts/scr_create_button/scr_create_button.yy",},},
+    {"id":{"name":"obj_generic_choice_box","path":"objects/obj_generic_choice_box/obj_generic_choice_box.yy",},},
     {"id":{"name":"obj_generic_textbox","path":"objects/obj_generic_textbox/obj_generic_textbox.yy",},},
     {"id":{"name":"obj_main_menu","path":"objects/obj_main_menu/obj_main_menu.yy",},},
     {"id":{"name":"scr_action_input","path":"scripts/scr_action_input/scr_action_input.yy",},},
