@@ -57,3 +57,24 @@ function scr_get_contrasting_color(color) {
         return c_white;
     }
 }
+
+/// scr_get_lighter_color(color, amount)
+//
+// Returns a lighter version of the specified color by the given amount.
+//
+// Arguments:
+// color - The color value in hexadecimal format (e.g., $FF0000 for red).
+// amount - The amount by which to lighten the color (0 to 1).
+
+function scr_get_lighter_color(color, amount) {
+    var red = color div 65536;
+    var green = (color div 256) mod 256;
+    var blue = color mod 256;
+
+    red = min(red + (255 - red) * amount, 255);
+    green = min(green + (255 - green) * amount, 255);
+    blue = min(blue + (255 - blue) * amount, 255);
+
+    return red * 65536 + green * 256 + blue;
+}
+
