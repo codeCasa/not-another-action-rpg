@@ -1,56 +1,76 @@
 /// @description Mini-map script
 
+// Zoom factor for the mini-map (adjust as desired)
+var zoomFactor = 0.5; // Change this value to control the zoom level
+
 // Calculate the mini-map size based on the current game resolution
 var miniMapSize = min(display_get_width(), display_get_height()) * 0.2;
-var miniMapRadius = miniMapSize * 0.5;
+var miniMapRadius = miniMapSize * 0.3;
+var miniMapCenterX = x + miniMapRadius;
+var miniMapCenterY = y + miniMapRadius;
 
-// Create a temporary surface to draw the room on
-var roomSurface = -1; // Variable to store the surface ID
-if (!surface_exists(roomSurface)) {
-    roomSurface = surface_create(room_width, room_height); // Create a surface with the same dimensions as the room
+// Calculate the scaled mini-map size
+var scaledMiniMapSize = miniMapSize / zoomFactor;
+
+// Calculate the scaling factors for the mini-map objects
+var scaleX = scaledMiniMapSize / room_width;
+var scaleY = scaledMiniMapSize / room_height;
+
+// Create a temporary surface to draw the mini-map on
+var miniMapSurface = -1;
+if (!surface_exists(miniMapSurface)) {
+    miniMapSurface = surface_create(scaledMiniMapSize, scaledMiniMapSize);
 }
 
 // Set the target surface for drawing
-surface_set_target(roomSurface);
+var previousSurface = surface_get_target();
+surface_set_target(miniMapSurface);
 
 // Clear the surface
 draw_clear_alpha(c_black, 0);
 
-// Draw the room onto the surface
-with (all) {
-    // Draw instances
-    if (object_index != obj_player && object_index == obj_generic && object_index.should_draw) {
-        draw_self();
+// Reset the target surface
+surface_reset_target();
+
+// Draw the circular mini-map background with black border
+draw_set_color(c_black);
+draw_circle(miniMapCenterX, miniMapCenterY, miniMapRadius + 1, false);
+draw_set_color(c_white);
+draw_circle(miniMapCenterX, miniMapCenterY, miniMapRadius, false);
+
+// Set the target surface for drawing
+surface_set_target(miniMapSurface);
+
+// Draw the room onto the mini-map surface
+with (obj_generic) {
+    if (should_draw) {
+        var drawX = x * scaleX - miniMapCenterX + x + miniMapRadius;
+        var drawY = y * scaleY - miniMapCenterY + y + miniMapRadius;
+        // Clip the sprite to the mini-map boundaries
+		var spriteLeft = max(0, -drawX);
+		var spriteTop = max(0, -drawY);
+		var spriteRight = min(sprite_width, scaledMiniMapSize - drawX, sprite_width - spriteLeft);
+		var spriteBottom = min(sprite_height, scaledMiniMapSize - drawY, sprite_height - spriteTop);
+
+		// Adjust the drawing position to fit within the mini-map bounds
+		drawX += spriteLeft;
+		drawY += spriteTop;
+
+
+        
+        draw_sprite_part(sprite_index, image_index, spriteLeft, spriteTop, spriteRight - spriteLeft, spriteBottom - spriteTop, drawX, drawY);
     }
 }
 
 // Reset the target surface
 surface_reset_target();
 
-// Calculate the scaling factors
-var scaleX = miniMapSize / room_width;
-var scaleY = miniMapSize / room_height;
+// Draw the mini-map using the mini-map surface
+draw_surface_stretched(miniMapSurface, x + 1, y + 1, miniMapSize - 2, miniMapSize - 2);
 
-// Draw the player's position and direction on the mini-map
-var playerX = obj_player.x; // Replace "obj_player" with the actual player object name
-var playerY = obj_player.y; // Replace "obj_player" with the actual player object name
-var playerMapX = x + playerX * scaleX;
-var playerMapY = y + playerY * scaleY;
-var playerSize = 4; // Adjust the player arrow size as desired
+// Reset the target surface
+surface_set_target(previousSurface);
+surface_reset_target();
 
-// Draw the white outline around the mini-map
-var outlineThickness = 2;
-draw_set_color(c_white);
-draw_rectangle(x, y, x + miniMapSize, y + miniMapSize, false);
-draw_rectangle(x + outlineThickness, y + outlineThickness, x + miniMapSize - outlineThickness, y + miniMapSize - outlineThickness, false);
-
-// Draw the mini-map from the room surface
-draw_set_color(c_white);
-draw_surface_ext(roomSurface, x + outlineThickness, y + outlineThickness, scaleX, scaleY, 0, c_white, 1);
-
-// Draw the player arrow
-draw_set_color(#D4AF37);
-self.drawArrow(playerMapX, playerMapY, playerSize, obj_player.image_angle, #D4AF37);
-
-// Destroy the room surface to free up memory
-surface_free(roomSurface);
+// Destroy the mini-map surface to free up memory
+surface_free(miniMapSurface);
