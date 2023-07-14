@@ -26,16 +26,24 @@ self.width = width;
 self.height = height;
 self.cornerRadius = cornerRadius;
 self.colorEnum = colorEnum;
-self.bgColor = scr_get_theme_color(colorEnum);
-self.textColor = scr_get_contrasting_color(bgColor);
-self.bezelColor = make_color_rgb(
-    min(color_get_red(bgColor) + 50, 255),
-    min(color_get_green(bgColor) + 50, 255),
-    min(color_get_blue(bgColor) + 50, 255)
-);
+self.bgColor = undefined
 self.move_direction = 0;
 self.debounce_timer = 0;
 
+
+self.initializeColors = function() {
+	if(self.colorEnum == undefined){
+		exit
+	}
+	self.colorEnum = colorEnum;
+	self.bgColor = scr_get_theme_color(colorEnum);
+	self.textColor = scr_get_contrasting_color(bgColor);
+	self.bezelColor = make_color_rgb(
+	    min(color_get_red(bgColor) + 50, 255),
+	    min(color_get_green(bgColor) + 50, 255),
+	    min(color_get_blue(bgColor) + 50, 255)
+	);
+}
 
 /// scr_split_text_into_pages(text, charactersPerPage)
 ///

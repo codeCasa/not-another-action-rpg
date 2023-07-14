@@ -14,12 +14,14 @@ targetX = x + moveDirectionX * walkSpeed;
 targetY = y + moveDirectionY * walkSpeed;
 
 // horizontal collision
-if (!place_meeting(targetX, y, obj_wall)) {
+var collidedWith = instance_place(targetX, y, obj_generic);
+if (collidedWith == noone || collidedWith.is_passable) {
     x = lerp(x, targetX, 0.2); // Adjust the lerp value as desired for smoother movement
 }
 
 // vertical collision
-if (!place_meeting(x, targetY, obj_wall)) {
+collidedWith = instance_place(x, targetY, obj_generic)
+if (collidedWith == noone || collidedWith.is_passable) {
     y = lerp(y, targetY, 0.2); // Adjust the lerp value as desired for smoother movement
 }
 

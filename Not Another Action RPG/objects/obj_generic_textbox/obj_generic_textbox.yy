@@ -11,8 +11,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "gui_elements",
-    "path": "folders/Objects/gui_elements.yy",
+    "name": "text_boxes",
+    "path": "folders/Objects/gui_elements/text_boxes.yy",
   },
   "parentObjectId": null,
   "persistent": false,

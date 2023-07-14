@@ -6,7 +6,7 @@ global.cameraX = 0
 global.cameraY = 0
 cameraTarget = obj_player
 
-global.cameraWidth = 20 * 20 * 1.5
+global.cameraWidth = 20 * 20 * 2.5
 global.cameraHeight = 20 * 20 * 1.5
 
 view_enabled = true

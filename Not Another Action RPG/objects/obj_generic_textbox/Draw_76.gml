@@ -7,3 +7,7 @@ if(self.text != undefined
 	self.pageTexts = self.split_text_into_pages(self.text, self.charactersPerPage)
 	self.maxPages = array_length(self.pageTexts)
 }
+
+if(self.bgColor == undefined){
+	self.initializeColors() 
+}
