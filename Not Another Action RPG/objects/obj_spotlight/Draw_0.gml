@@ -1,6 +1,7 @@
 // Simulate lights off
-draw_set_color(c_black);
-draw_rectangle(0, 0, room_width, room_height, false);
+//draw_set_color(c_black);
+//draw_rectangle(0, 0, room_width, room_height, false);
+draw_clear_alpha(c_black, 0);
 
 // Set the spotlight parameters
 var radius = 100; // Adjust the radius of the spotlight
@@ -11,15 +12,60 @@ var color = c_white; // Adjust the color as desired
 var spotlightX = obj_player.x;
 var spotlightY = obj_player.y;
 
+// Draw the spotlight using a circular gradient
+var segments = 32; // Adjust the number of segments for smoother edges
+var angleStep = 360 / segments;
+var innerRadius = radius * (1 - softness);
+
+
+// Store the tilemap layers in an array and sort them by depth
+var layers = layer_get_all();
+var instanceLayer = layer_get_id("Instances");
+var tileLayers = [];
+
+for (var i = 0; i < array_length(layers); i++) {
+    var layerId = layers[i];
+    if (layerId != instanceLayer) {
+        tileLayers[array_length(tileLayers)] = layerId;
+    }
+}
+
+array_sort(tileLayers, function(a, b) {
+	var layerADepth = layer_get_depth(a);
+	var layerBDepth = layer_get_depth(b);
+	return layerADepth < layerBDepth
+});
+
+// Render tiles partially inside the spotlight in the original layer order
+for (var i = 0; i < array_length(tileLayers); i++) {
+    var tilesetLayer = tileLayers[i];
+    var mapId = layer_tilemap_get_id(tilesetLayer);
+    var tsId = tilemap_get_tileset(mapId);
+    var tileWidth = tilemap_get_tile_width(mapId);
+    var tileHeight = tilemap_get_tile_height(mapId);
+    
+    for (var tileY = 0; tileY < tilemap_get_height(mapId); tileY++) {
+        for (var tileX = 0; tileX < tilemap_get_width(mapId); tileX++) {
+            var tileData = tilemap_get(mapId, tileX, tileY);
+            
+            if (tileData != -1) {
+                var tilePosX = tileX * tileWidth;
+                var tilePosY = tileY * tileHeight;
+                
+                if (collision_circle(tilePosX + (tileWidth / 2), tilePosY + (tileHeight / 2), radius, obj_player, false, true)) {
+                    
+                    draw_tile(tsId, tileData, 0, tilePosX, tilePosY);
+                }
+            }
+        }
+    }
+}
+
 // Set the draw settings for the spotlight
 gpu_set_blendmode(bm_add);
 draw_set_color(color);
 draw_set_alpha(softness);
 
-// Draw the spotlight using a circular gradient
-var segments = 32; // Adjust the number of segments for smoother edges
-var angleStep = 360 / segments;
-var innerRadius = radius * (1 - softness);
 
 draw_primitive_begin(pr_trianglefan);
 draw_vertex(spotlightX, spotlightY); // Center vertex
@@ -38,13 +84,12 @@ draw_primitive_end();
 gpu_set_blendmode(bm_normal);
 draw_set_alpha(1);
 
-
 // Render partially inside the spotlight
 with (obj_generic) {
-	if(!should_draw){
+	if(!should_draw || !visible){
 		return
 	}
-    if (collision_circle(bbox_left, bbox_top, radius, obj_player, false, true) && should_draw) {
+    if (collision_circle(bbox_left, bbox_top, radius, obj_player, false, true)) {
         var collisionX = clamp(x, spotlightX - radius, spotlightX + radius);
         var collisionY = clamp(y, spotlightY - radius, spotlightY + radius);
         var distance = point_distance(spotlightX, spotlightY, collisionX, collisionY);
@@ -54,35 +99,4 @@ with (obj_generic) {
 			image_xscale, image_yscale, image_angle, image_blend, image_blend, image_blend, image_blend, alpha)
 
     }
-}
-
-// Render tilesets partially inside the spotlight
-var layers = layer_get_all() // Adjust the layer name as necessary
-var instanceId =  layer_get_id("Instances")
-for(var index = 0; index < array_length(layers); index++){
-	var tilesetLayer = layers[index]
-	if(tilesetLayer == instanceId){
-		continue
-	}
-	var map_id = layer_tilemap_get_id(tilesetLayer);
-	var tsId = tilemap_get_tileset(map_id);
-	var tile_width = tilemap_get_tile_width(map_id);
-	var tile_height = tilemap_get_tile_height(map_id);
-	for (var _x = 0; _x < room_width; _x += tile_width) {
-		for (var _y = 0; _y < room_height; _y += tile_height) {
-			if (collision_circle(_x + (tile_width / 2), _y + (tile_height / 2), radius, obj_player, false, true)) {
-				var collisionX = clamp(_x, spotlightX - radius, spotlightX + radius);
-				var collisionY = clamp(_y, spotlightY - radius, spotlightY + radius);
-				var distance = point_distance(spotlightX, spotlightY, collisionX, collisionY);
-				var alpha = 1 - (distance - innerRadius) / (radius - innerRadius);
-				var tileX = _x / tile_width;
-				var tileY = _y / tile_height;
-				var tileIndex = tilemap_get(map_id, tileX, tileY);
-			
-				if (tileIndex != -1) {
-					draw_tile(tsId, tileIndex, 0,_x, _y);
-				}
-			}
-		}
-	}
 }
