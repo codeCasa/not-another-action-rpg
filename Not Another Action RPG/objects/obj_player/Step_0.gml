@@ -1,5 +1,12 @@
 /// @description Core player logic
 
+if(global.is_cut_scene_active) {
+	image_speed = 0
+	exit;
+}else {
+	image_speed = active_image_speed
+}
+
 // get player input
 var key_left = scr_check_movement_key(MovementKey.Left);
 var key_right = scr_check_movement_key(MovementKey.Right);

@@ -1,5 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
+global.is_cut_scene_active = false
 debounce_timer = 0;
 
 menu_x = room_width/2;

@@ -30,6 +30,17 @@ self.bgColor = undefined
 self.move_direction = 0;
 self.debounce_timer = 0;
 
+self.reinitContent = function() {
+	if(self.text != undefined
+		&& string_length(self.text) > 0){
+		self.charactersPerPage = self.calculate_max_characters(self.text, width, height, string_height("M"))
+		self.pageTexts = self.split_text_into_pages(self.text, self.charactersPerPage)
+		self.maxPages = array_length(self.pageTexts)
+		self.currentPage = 0
+	}
+
+	self.initializeColors() 
+}
 
 self.initializeColors = function() {
 	if(self.colorEnum == undefined){
@@ -62,13 +73,13 @@ self.split_text_into_pages = function (text, charactersPerPage) {
     var currentCharCount = 0;
     
     // Iterate through each word in the array
-    for (var i = 0; i < array_length_1d(words); i++) {
+    for (var i = 0; i < array_length(words); i++) {
         var word = words[i];
         
         // Check if adding the word would exceed the maximum characters per page
         if (currentCharCount + string_length(word) > charactersPerPage) {
             // Add the current page text to the pages array
-            pages[array_length_1d(pages)] = currentPageText;
+            pages[array_length(pages)] = currentPageText;
             currentPageText = "";
             currentCharCount = 0;
         }
@@ -80,7 +91,7 @@ self.split_text_into_pages = function (text, charactersPerPage) {
         // If the word alone exceeds the maximum characters per page, move it to the next page
         if (currentCharCount > charactersPerPage) {
             // Add the current page text to the pages array
-            pages[array_length_1d(pages)] = currentPageText;
+            pages[array_length(pages)] = currentPageText;
             currentPageText = "";
             currentCharCount = 0;
         }
@@ -88,7 +99,7 @@ self.split_text_into_pages = function (text, charactersPerPage) {
     
     // Add any remaining text to the pages array
     if (currentCharCount > 0) {
-        pages[array_length_1d(pages)] = currentPageText;
+        pages[array_length(pages)] = currentPageText;
     }
     
     return pages;

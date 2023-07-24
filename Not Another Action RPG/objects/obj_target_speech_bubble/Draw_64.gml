@@ -1,5 +1,8 @@
 /// @description obj_target_speech_bubble Draw Event
 // You can write your code in this editor
+if(!visible) {
+	exit
+}
 
 if (self.speechTargetObj == undefined || self.speechTargetObj == noone || !self.speechTargetObj) {
     exit;
@@ -10,6 +13,13 @@ self.bezelThickness = min(width, height) * 0.03;
 // Set the position of the speech bubble relative to the target object
 var speechBubbleX = self.speechTargetObj.x - (self.width / 2);
 var speechBubbleY = self.speechTargetObj.y - (self.height * 1.25) - xPixels;
+
+// Normalize the position to the GUI window size
+var guiWidth = display_get_gui_width();
+var guiHeight = display_get_gui_height();
+speechBubbleX = (speechBubbleX / room_width) * guiWidth;
+speechBubbleY = (speechBubbleY / room_height) * guiHeight;
+speechBubbleY -= (self.height * 4) - xPixels;
 
 // Check if the speech bubble is partially outside of the room's bounds
 var speechBubbleRight = speechBubbleX + self.width;
@@ -37,7 +47,7 @@ if (isAboveTopBoundary) {
 
     // Render arrow above the speech bubble pointed upwards
     var arrowSize = 12; // Adjust the size of the arrow as desired
-    var arrowX = self.speechTargetObj.x;
+	var arrowX = (self.speechTargetObj.x / room_width) * guiWidth;
     var arrowY = speechBubbleY - (self.bezelThickness * 1.75) - arrowSize;
 
     draw_set_color(bezelColor);
@@ -53,8 +63,8 @@ if (isAboveTopBoundary) {
 if(!isAboveTopBoundary){
 	// Draw the arrow (triangle)
 	var arrowSize = 12; // Adjust the size of the arrow as desired
-	var arrowX = self.speechTargetObj.x;
-	var arrowY = speechBubbleY + self.height + (self.bezelThickness * 1.75);
+	var arrowX = (self.speechTargetObj.x / room_width) * guiWidth;
+	var arrowY = speechBubbleY + self.height + (self.bezelThickness * 1.75) + arrowSize / 2;
 
 	draw_set_color(bezelColor);
 	draw_triangle(arrowX - arrowSize, arrowY, arrowX + arrowSize, arrowY, arrowX, arrowY + arrowSize, false);
@@ -64,7 +74,7 @@ if(!isAboveTopBoundary){
 }
 
 // Calculate the position for the text
-self.text_x = speechBubbleX + cornerRadius;
+self.text_x = speechBubbleX + (cornerRadius * 0.5);
 self.text_y = speechBubbleY + (cornerRadius * 0.5);
 
 // Draw the speech bubble
