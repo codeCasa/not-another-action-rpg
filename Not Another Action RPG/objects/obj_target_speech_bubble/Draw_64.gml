@@ -74,7 +74,7 @@ if(!isAboveTopBoundary){
 }
 
 // Calculate the position for the text
-self.text_x = speechBubbleX + (cornerRadius * 0.5);
+self.text_x = speechBubbleX + (cornerRadius * 0.25);
 self.text_y = speechBubbleY + (cornerRadius * 0.5);
 
 // Draw the speech bubble
@@ -88,7 +88,7 @@ draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_color(textColor);
 
-draw_text_ext(text_x, text_y, pageTexts[currentPage], -1, self.width - (cornerRadius * 2));
+draw_text_ext(text_x, text_y, pageTexts[currentPage], -1, self.width - (cornerRadius));
 
 // Draw the target object's name speech bubble
 if (self.speechTargetObj.objName != undefined && string_length(self.speechTargetObj.objName) > 0) {

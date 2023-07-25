@@ -3,23 +3,26 @@ if(self.spotlightTarget == undefined || self.spotlightTarget == noone){
 }
 
 // Simulate lights off
-draw_clear_alpha(c_black, 0);
+draw_set_color(c_black)
+draw_set_alpha(0.8)
+draw_rectangle(0, 0, room_width, room_height, false)
+//draw_clear_alpha(c_black, 0);
 
 // Set the spotlight parameters
 var radius = 100; // Adjust the radius of the spotlight
-var softness = 0.25; // Adjust the softness of the spotlight
-var color = c_white; // Adjust the color as desired
+var softness = 0.5; // Adjust the softness of the spotlight
+var color = #e9e0c9; // Adjust the color as desired
 
 // Calculate the spotlight position based on obj_player
 var spotlightX = self.spotlightTarget.x;
 var spotlightY = self.spotlightTarget.y;
 
 // Draw the spotlight using a circular gradient
-var segments = 32; // Adjust the number of segments for smoother edges
+var segments = 64; // Adjust the number of segments for smoother edges
 var angleStep = 360 / segments;
 var innerRadius = radius * (1 - softness);
 
-
+/*
 // Store the tilemap layers in an array and sort them by depth
 var layers = layer_get_all();
 var instanceLayer = layer_get_id("Instances");
@@ -62,7 +65,7 @@ for (var i = 0; i < array_length(tileLayers); i++) {
         }
     }
 }
-
+*/
 // Set the draw settings for the spotlight
 gpu_set_blendmode(bm_add);
 draw_set_color(color);
@@ -86,6 +89,7 @@ draw_primitive_end();
 gpu_set_blendmode(bm_normal);
 draw_set_alpha(1);
 
+/*
 // Render partially inside the spotlight
 with (obj_generic) {
 	if(!should_draw || !visible){
@@ -147,3 +151,4 @@ for (var i = 0; i < array_length(tileLayers); i++) {
         }
     }
 }
+*/
