@@ -84,11 +84,33 @@ draw_roundrect_ext(speechBubbleX - bezelThickness, speechBubbleY - bezelThicknes
 draw_set_color(bgColor);
 draw_roundrect_ext(speechBubbleX, speechBubbleY, speechBubbleX + self.width, speechBubbleY + self.height, cornerRadius, cornerRadius, false);
 
+// Draw the text based on the selected TextDisplayStyle
+switch (self.textDisplayStyle) {
+    case TextDisplayStyle.Normal:
+        // Normal text display (as given in the original code)
+        draw_set_halign(fa_left);
+        draw_set_valign(fa_top);
+        draw_set_color(textColor);
+        draw_text_ext(text_x, text_y, pageTexts[currentPage], -1, self.width - (cornerRadius));
+        break;
+        
+    case TextDisplayStyle.Typewriter:
+        // Typewriter effect
+        draw_set_halign(fa_left);
+        draw_set_valign(fa_top);
+        draw_set_color(textColor);
+
+        var textToDisplay = string_copy(pageTexts[currentPage], 1, textCharsToShow);
+        draw_text_ext(text_x, text_y, textToDisplay, -1, self.width - (cornerRadius));
+        break;
+}
+/*
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_color(textColor);
 
 draw_text_ext(text_x, text_y, pageTexts[currentPage], -1, self.width - (cornerRadius));
+*/
 
 // Draw the target object's name speech bubble
 if (self.speechTargetObj.objName != undefined && string_length(self.speechTargetObj.objName) > 0) {

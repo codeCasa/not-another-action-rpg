@@ -20,6 +20,7 @@ self.targetedSpeechBubble = scr_create_target_speech_bubble(x, y, string_width("
 self.targetedSpeechBubble.xPixels = 0
 self.targetedSpeechBubble.xSeconds = 1.5
 self.targetedSpeechBubble.pageDelay = 1.5
+self.targetedSpeechBubble.textDisplayStyle = TextDisplayStyle.Typewriter
 self.targetedSpeechBubble.reinitContent()
 self.targetedSpeechBubble.onFinished = function() {
 	if(self.current_opening_text >= array_length(self.opening_texts) - 1){

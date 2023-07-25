@@ -4,7 +4,7 @@ if(self.spotlightTarget == undefined || self.spotlightTarget == noone){
 
 // Simulate lights off
 draw_set_color(c_black)
-draw_set_alpha(0.8)
+draw_set_alpha(0.85)
 draw_rectangle(0, 0, room_width, room_height, false)
 //draw_clear_alpha(c_black, 0);
 
