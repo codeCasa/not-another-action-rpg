@@ -33,6 +33,7 @@
     {"name":"Tile Sets","order":2,"path":"folders/Tile Sets.yy",},
     {"name":"modern_sets","order":1,"path":"folders/Tile Sets/modern_sets.yy",},
     {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
+    {"name":"ai_gen","order":4,"path":"folders/Sprites/ai_gen.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"obj_spotlight","order":4,"path":"objects/obj_spotlight/obj_spotlight.yy",},
@@ -52,6 +53,7 @@
     {"name":"scr_action_input","order":4,"path":"scripts/scr_action_input/scr_action_input.yy",},
     {"name":"obj_target_speech_bubble","order":2,"path":"objects/obj_target_speech_bubble/obj_target_speech_bubble.yy",},
     {"name":"scr_array_extensions","order":8,"path":"scripts/scr_array_extensions/scr_array_extensions.yy",},
+    {"name":"obj_light_switch","order":1,"path":"objects/obj_light_switch/obj_light_switch.yy",},
     {"name":"ts_modern_interior_floor","order":3,"path":"tilesets/ts_modern_interior_floor/ts_modern_interior_floor.yy",},
     {"name":"scr_player_enum","order":9,"path":"scripts/scr_player_enum/scr_player_enum.yy",},
     {"name":"spr_modern_interior_floor","order":3,"path":"sprites/spr_modern_interior_floor/spr_modern_interior_floor.yy",},

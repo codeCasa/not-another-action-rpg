@@ -1,12 +1,5 @@
 /// @description Core player logic
 
-if(global.is_cut_scene_active) {
-	image_speed = 0
-	exit;
-}else {
-	image_speed = active_image_speed
-}
-
 // get player input
 var key_left = scr_check_movement_key(MovementKey.Left);
 var key_right = scr_check_movement_key(MovementKey.Right);
@@ -16,6 +9,12 @@ var key_down = scr_check_movement_key(MovementKey.Down);
 // calculate movement
 moveDirectionX = key_right - key_left; // +1 move right; -1 move left
 moveDirectionY = key_down - key_up; // +1 move up; -1 move down
+
+
+if(global.is_cut_scene_active || global.textbox_open) {
+	moveDirectionX = 0
+	moveDirectionY = 0
+}
 
 targetX = x + moveDirectionX * walkSpeed;
 targetY = y + moveDirectionY * walkSpeed;
@@ -35,24 +34,26 @@ if (collidedWith == noone || collidedWith.is_passable) {
 var previousImageIndex = image_index; // Store the previous image index
 
 if (moveDirectionX == 0 && moveDirectionY == 0) {
-    // Determine the correct idle animation based on the previous movement direction
-    if (previousImageIndex >= 0 && previousImageIndex < 6) {
-        // idle right
-        sprite_index = spr_player_idle;
-        image_index = 0;
-    } else if (previousImageIndex >= 6 && previousImageIndex < 12) {
-        // idle up
-        sprite_index = spr_player_idle;
-        image_index = 6;
-    } else if (previousImageIndex >= 12 && previousImageIndex < 18) {
-        // idle left
-        sprite_index = spr_player_idle;
-        image_index = 12;
-    } else {
-        // idle down
-        sprite_index = spr_player_idle;
-        image_index = 18;
-    }
+	if(sprite_index != spr_player_idle){
+	    // Determine the correct idle animation based on the previous movement direction
+	    if (previousImageIndex >= 0 && previousImageIndex < 6) {
+	        // idle right
+	        sprite_index = spr_player_idle;
+	        image_index = 0;
+	    } else if (previousImageIndex >= 6 && previousImageIndex < 12) {
+	        // idle up
+	        sprite_index = spr_player_idle;
+	        image_index = 6;
+	    } else if (previousImageIndex >= 12 && previousImageIndex < 18) {
+	        // idle left
+	        sprite_index = spr_player_idle;
+	        image_index = 12;
+	    } else {
+	        // idle down
+	        sprite_index = spr_player_idle;
+	        image_index = 18;
+	    }
+	}
 } else {
     if (sprite_index != spr_player_walking) {
         sprite_index = spr_player_walking;

@@ -16,10 +16,18 @@ self.opening_texts = [
 	"Why is it so dark?",
 	"... let's find a light switch"
 ];
+self.player_rotation_image_indices = [
+	0, // right
+	12, // left
+	6, // up
+	18, // down
+	0, // right
+	6 // up
+]
 self.targetedSpeechBubble = scr_create_target_speech_bubble(x, y, string_width("...") * 1.3, string_height("M") * 2, 16, opening_texts[current_opening_text], ThemeColor.Surface, obj_player)
 self.targetedSpeechBubble.xPixels = 0
-self.targetedSpeechBubble.xSeconds = 1.5
-self.targetedSpeechBubble.pageDelay = 1.5
+self.targetedSpeechBubble.xSeconds = 2
+self.targetedSpeechBubble.pageDelay = 2
 self.targetedSpeechBubble.textDisplayStyle = TextDisplayStyle.Typewriter
 self.targetedSpeechBubble.reinitContent()
 self.targetedSpeechBubble.onFinished = function() {
@@ -35,4 +43,7 @@ self.targetedSpeechBubble.onFinished = function() {
 	self.targetedSpeechBubble.text = self.opening_texts[current_opening_text]
 	self.targetedSpeechBubble.reinitContent()
 	self.targetedSpeechBubble.visible = true
+	with(obj_player) {
+		image_index = other.player_rotation_image_indices[other.current_opening_text]
+	}
 }
