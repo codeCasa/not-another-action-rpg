@@ -79,6 +79,7 @@ if (self.textDisplayStyle == TextDisplayStyle.Typewriter) {
             // Move to the next page and reset the typewriter effect
             currentPage++;
             if (currentPage >= maxPages) {
+				currentPage = maxPages - 1
                 if (self.onFinished != undefined) {
                     self.onFinished();
                 }

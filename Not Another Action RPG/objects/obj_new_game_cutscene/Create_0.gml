@@ -24,8 +24,8 @@ self.player_rotation_image_indices = [
 	0, // right
 	6 // up
 ]
-self.targetedSpeechBubble = scr_create_target_speech_bubble(x, y, string_width("...") * 1.3, string_height("M") * 2, 16, opening_texts[current_opening_text], ThemeColor.Surface, obj_player)
-self.targetedSpeechBubble.xPixels = 0
+self.targetedSpeechBubble = scr_create_target_speech_bubble(x, y, string_width("...") * 1.3, string_height("M") * 2, 16, opening_texts[current_opening_text], ThemeColor.Surface, obj_player, "TextBoxInstances")
+self.targetedSpeechBubble.xPixels = 50
 self.targetedSpeechBubble.xSeconds = 2
 self.targetedSpeechBubble.pageDelay = 2
 self.targetedSpeechBubble.textDisplayStyle = TextDisplayStyle.Typewriter
@@ -45,5 +45,22 @@ self.targetedSpeechBubble.onFinished = function() {
 	self.targetedSpeechBubble.visible = true
 	with(obj_player) {
 		image_index = other.player_rotation_image_indices[other.current_opening_text]
+	}
+}
+
+self.onLightsTurnedOn = function() {
+	var lightsOnText = "Okay, where in the world am I?"
+	self.targetedSpeechBubble = scr_create_target_speech_bubble(x, y, string_width(lightsOnText) * 1.2, string_height("M") * 2, 16, lightsOnText, ThemeColor.Surface, obj_player, "TextBoxInstances")
+	self.targetedSpeechBubble.visible = false
+	self.targetedSpeechBubble.xPixels = 50
+	self.targetedSpeechBubble.xSeconds = 2
+	self.targetedSpeechBubble.pageDelay = 2
+	self.targetedSpeechBubble.textDisplayStyle = TextDisplayStyle.Typewriter
+	self.targetedSpeechBubble.reinitContent()
+	self.targetedSpeechBubble.visible = true
+	self.targetedSpeechBubble.onFinished = function() {
+		self.targetedSpeechBubble.visible = false
+		global.is_cut_scene_active = false
+		instance_destroy(self.targetedSpeechBubble)
 	}
 }

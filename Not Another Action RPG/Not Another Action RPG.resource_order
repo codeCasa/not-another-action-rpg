@@ -26,6 +26,7 @@
     {"name":"Shaders","order":6,"path":"folders/Shaders.yy",},
     {"name":"Sounds","order":3,"path":"folders/Sounds.yy",},
     {"name":"Sprites","order":1,"path":"folders/Sprites.yy",},
+    {"name":"ai_gen","order":4,"path":"folders/Sprites/ai_gen.yy",},
     {"name":"meta","order":3,"path":"folders/Sprites/meta.yy",},
     {"name":"modern_sets","order":1,"path":"folders/Sprites/modern_sets.yy",},
     {"name":"indv_items","order":4,"path":"folders/Sprites/modern_sets/indv_items.yy",},
@@ -33,7 +34,6 @@
     {"name":"Tile Sets","order":2,"path":"folders/Tile Sets.yy",},
     {"name":"modern_sets","order":1,"path":"folders/Tile Sets/modern_sets.yy",},
     {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
-    {"name":"ai_gen","order":4,"path":"folders/Sprites/ai_gen.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"obj_spotlight","order":4,"path":"objects/obj_spotlight/obj_spotlight.yy",},

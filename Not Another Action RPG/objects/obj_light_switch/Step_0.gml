@@ -10,10 +10,6 @@ if((!didHitConfirmKey && isActive)
 
 if(isActive){
 	isActive = false
-	var guiWidth = display_get_gui_width();
-	var guiHeight = display_get_gui_height();
-	textbox.x = (x / room_width) * guiWidth;
-	textbox.y = ((y + 10) / room_height) * guiHeight;
 	textbox.visible = true
 }else{
 	timeToDismissTb -= delta_time / 1000000;
@@ -24,4 +20,7 @@ if(timeToDismissTb <= 0 && textbox != undefined){
 	instance_destroy(textbox)
 	instance_destroy(obj_spotlight)
 	textbox = undefined
+	with(obj_new_game_cutscene){
+		self.onLightsTurnedOn()
+	}
 }

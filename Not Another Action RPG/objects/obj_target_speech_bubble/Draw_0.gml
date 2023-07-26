@@ -14,13 +14,6 @@ self.bezelThickness = min(width, height) * 0.03;
 var speechBubbleX = self.speechTargetObj.x - (self.width / 2);
 var speechBubbleY = self.speechTargetObj.y - (self.height * 1.25) - xPixels;
 
-// Normalize the position to the GUI window size
-var guiWidth = display_get_gui_width();
-var guiHeight = display_get_gui_height();
-speechBubbleX = (speechBubbleX / room_width) * guiWidth;
-speechBubbleY = (speechBubbleY / room_height) * guiHeight;
-speechBubbleY -= (self.height * 4) - xPixels;
-
 // Check if the speech bubble is partially outside of the room's bounds
 var speechBubbleRight = speechBubbleX + self.width;
 var speechBubbleBottom = speechBubbleY + self.height;
@@ -47,7 +40,7 @@ if (isAboveTopBoundary) {
 
     // Render arrow above the speech bubble pointed upwards
     var arrowSize = 12; // Adjust the size of the arrow as desired
-	var arrowX = (self.speechTargetObj.x / room_width) * guiWidth;
+	var arrowX = self.speechTargetObj.x// / room_width) * guiWidth;
     var arrowY = speechBubbleY - (self.bezelThickness * 1.75) - arrowSize;
 
     draw_set_color(bezelColor);
@@ -63,7 +56,7 @@ if (isAboveTopBoundary) {
 if(!isAboveTopBoundary){
 	// Draw the arrow (triangle)
 	var arrowSize = 12; // Adjust the size of the arrow as desired
-	var arrowX = (self.speechTargetObj.x / room_width) * guiWidth;
+	var arrowX = self.speechTargetObj.x;
 	var arrowY = speechBubbleY + self.height + (self.bezelThickness * 1.75) + arrowSize / 2;
 
 	draw_set_color(bezelColor);
@@ -104,19 +97,12 @@ switch (self.textDisplayStyle) {
         draw_text_ext(text_x, text_y, textToDisplay, -1, self.width - (cornerRadius));
         break;
 }
-/*
-draw_set_halign(fa_left);
-draw_set_valign(fa_top);
-draw_set_color(textColor);
-
-draw_text_ext(text_x, text_y, pageTexts[currentPage], -1, self.width - (cornerRadius));
-*/
 
 // Draw the target object's name speech bubble
 if (self.speechTargetObj.objName != undefined && string_length(self.speechTargetObj.objName) > 0) {
     // Calculate the dimensions for the name speech bubble
     var nameBubbleWidth = (string_width(self.speechTargetObj.objName) * 2.5) + (cornerRadius * 2);
-    var nameBubbleX = speechBubbleX //self.speechTargetObj.x - (nameBubbleWidth / 2);
+    var nameBubbleX = speechBubbleX;
     nameBubbleY = isAboveTopBoundary ? speechBubbleY + self.height + 15 : speechBubbleY - nameBubbleHeight - 15; // Adjust the vertical spacing as desired
 
     // Check if the name speech bubble is partially outside of the room's bounds
