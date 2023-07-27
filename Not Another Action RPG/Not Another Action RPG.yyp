@@ -50,7 +50,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.6.0.92",
+    "IDEVersion": "2023.6.0.89",
   },
   "resources": [
     {"id":{"name":"obj_faction","path":"objects/obj_faction/obj_faction.yy",},},
@@ -92,8 +92,10 @@
     {"id":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},},
     {"id":{"name":"scr_player_enum","path":"scripts/scr_player_enum/scr_player_enum.yy",},},
     {"id":{"name":"spr_modern_interior_floor","path":"sprites/spr_modern_interior_floor/spr_modern_interior_floor.yy",},},
+    {"id":{"name":"spr_office_sign","path":"sprites/spr_office_sign/spr_office_sign.yy",},},
     {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},},
     {"id":{"name":"obj_main_pause_menu","path":"objects/obj_main_pause_menu/obj_main_pause_menu.yy",},},
+    {"id":{"name":"obj_office_sign","path":"objects/obj_office_sign/obj_office_sign.yy",},},
     {"id":{"name":"ts_modern_office_shadow","path":"tilesets/ts_modern_office_shadow/ts_modern_office_shadow.yy",},},
     {"id":{"name":"scr_create_text_boxes","path":"scripts/scr_create_text_boxes/scr_create_text_boxes.yy",},},
     {"id":{"name":"spr_room_builder","path":"sprites/spr_room_builder/spr_room_builder.yy",},},

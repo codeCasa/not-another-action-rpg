@@ -1,5 +1,9 @@
 /// @description Mini-map script
 
+if(!visible) {
+	exit;
+}
+
 // Zoom factor for the mini-map (adjust as desired)
 var zoomFactor = 1; // Change this value to control the zoom level
 var miniMapMaxSizeRatio = 0.08;
@@ -12,6 +16,12 @@ var miniMapLeft = x + 12;
 var miniMapTop = y + 12;
 var miniMapRight = miniMapLeft + miniMapWidth;
 var miniMapBottom = miniMapTop + miniMapHeight;
+draw_set_alpha(0.65)
+
+if(collision_rectangle(miniMapLeft, miniMapTop, miniMapRight, miniMapBottom, obj_player, false, true)){
+	draw_set_alpha(1)
+	exit
+}
 
 // Draw the rectangular mini-map background with black border and white fill
 draw_set_color(c_black);
