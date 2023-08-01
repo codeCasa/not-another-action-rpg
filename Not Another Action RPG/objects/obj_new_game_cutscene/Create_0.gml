@@ -70,7 +70,7 @@ self.onLightsTurnedOn = function() {
 
 self.onTestRoomSignTriggered = function() {
 	var postTestRoomText = "Hmmm... So it looks like we're in a place called 'Test Room'. Let's keep poking around and maybe we'll find something useful..."
-	self.targetedSpeechBubble = scr_create_target_speech_bubble(x, y, 150, string_height("M") * 3, 16,
+	self.targetedSpeechBubble = scr_create_target_speech_bubble(x, y, 200, string_height("M") * 3, 16,
 		postTestRoomText, ThemeColor.Surface, obj_player, "TextBoxInstances")
 	self.targetedSpeechBubble.visible = false
 	self.targetedSpeechBubble.xPixels = 50
