@@ -13,6 +13,7 @@ if(isActive){
 	textbox.text = areLightsOn ? "Test Room" : "Hmm... It's too dark to make out the sign";
 	textbox.width = string_width(textbox.text)
 	textbox.reinitContent()
+	global.textbox_open = true
 	textbox.visible = true
 }else{
 	timeToDismissTb -= delta_time / 1000000;
@@ -21,7 +22,8 @@ if(isActive){
 if(timeToDismissTb <= 0 && textbox != undefined){
 	textbox.visible = false
 	isActive = true
-timeToDismissTb = 1.2
+	timeToDismissTb = 2
+	global.textbox_open = false
 	if(didTriggerSignCallback || !areLightsOn){
 		exit
 	}
