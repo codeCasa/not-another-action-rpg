@@ -62,8 +62,8 @@ self.onLightsTurnedOn = function() {
 		self.targetedSpeechBubble.visible = false
 		global.is_cut_scene_active = false
 		instance_destroy(self.targetedSpeechBubble)
-		with(obj_minimap) {
-			self.visible = true;
+		with(obj_office_sign){
+			self.areLightsOn = true
 		}
 	}
 }
@@ -74,8 +74,8 @@ self.onTestRoomSignTriggered = function() {
 		postTestRoomText, ThemeColor.Surface, obj_player, "TextBoxInstances")
 	self.targetedSpeechBubble.visible = false
 	self.targetedSpeechBubble.xPixels = 50
-	self.targetedSpeechBubble.xSeconds = 2
-	self.targetedSpeechBubble.pageDelay = 2
+	self.targetedSpeechBubble.xSeconds = 1.5
+	self.targetedSpeechBubble.pageDelay = 1.5
 	self.targetedSpeechBubble.textDisplayStyle = TextDisplayStyle.Typewriter
 	self.targetedSpeechBubble.typewriterSpeed = 15
 	self.targetedSpeechBubble.reinitContent()
@@ -84,5 +84,8 @@ self.onTestRoomSignTriggered = function() {
 		self.targetedSpeechBubble.visible = false
 		global.is_cut_scene_active = false
 		instance_destroy(self.targetedSpeechBubble)
+		with(obj_random_office_npc){
+			self.visible = true
+		}
 	}
 }

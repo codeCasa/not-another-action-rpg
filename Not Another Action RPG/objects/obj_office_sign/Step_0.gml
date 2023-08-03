@@ -10,6 +10,9 @@ if((!didHitConfirmKey && isActive)
 
 if(isActive){
 	isActive = false
+	textbox.text = areLightsOn ? "Test Room" : "Hmm... It's too dark to make out the sign";
+	textbox.width = string_width(textbox.text)
+	textbox.reinitContent()
 	textbox.visible = true
 }else{
 	timeToDismissTb -= delta_time / 1000000;
@@ -18,7 +21,8 @@ if(isActive){
 if(timeToDismissTb <= 0 && textbox != undefined){
 	textbox.visible = false
 	isActive = true
-	if(didTriggerSignCallback){
+timeToDismissTb = 1.2
+	if(didTriggerSignCallback || !areLightsOn){
 		exit
 	}
 	with(obj_new_game_cutscene){

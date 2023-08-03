@@ -2,10 +2,10 @@
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
   "name": "spr_modern_office_no_shadow",
-  "bbox_bottom": 2495,
-  "bbox_left": 48,
-  "bbox_right": 815,
-  "bbox_top": 24,
+  "bbox_bottom": 1663,
+  "bbox_left": 32,
+  "bbox_right": 543,
+  "bbox_top": 16,
   "bboxMode": 0,
   "collisionKind": 1,
   "collisionTolerance": 0,
@@ -13,14 +13,14 @@
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"4418218b-2131-4d7a-836a-a985ea8b58b5",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"5c8209bc-a018-4657-bb59-4cc68c644dac",},
   ],
   "gridX": 0,
   "gridY": 0,
-  "height": 2544,
+  "height": 1696,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"498cf9de-9867-4988-9579-062a828f787a","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"0b510030-b1a6-4087-90e7-de027774225e","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
   ],
   "nineSlice": null,
   "origin": 0,
@@ -54,7 +54,7 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"4418218b-2131-4d7a-836a-a985ea8b58b5","path":"sprites/spr_modern_office_no_shadow/spr_modern_office_no_shadow.yy",},},},"Disabled":false,"id":"8f1e7884-5d9f-46fb-a7eb-0f449908fd5e","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"5c8209bc-a018-4657-bb59-4cc68c644dac","path":"sprites/spr_modern_office_no_shadow/spr_modern_office_no_shadow.yy",},},},"Disabled":false,"id":"cb4944a0-4fed-4017-af1b-fbfb571e40f1","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,
@@ -70,5 +70,5 @@
   },
   "type": 0,
   "VTile": false,
-  "width": 816,
+  "width": 544,
 }
